@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     String msg = response.body().string();
-                    mEditText.setText("OK:"+msg);
+                    mEditText.setText("OK1:"+msg);
 
                 } catch (Exception e) {
                     e.printStackTrace();
