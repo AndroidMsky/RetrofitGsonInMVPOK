@@ -30,7 +30,7 @@ public class Generator {
 
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
+                .baseUrl(url)
                 .addConverterFactory(new StringConverterFactory())
                 .client(client)
                 .build();

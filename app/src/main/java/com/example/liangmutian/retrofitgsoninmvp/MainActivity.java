@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     public void get(String id, String key) {
         TestApi api = Generator.createService(TestApi.class);
         Call<ResponseBody> call = api.get(id, key);
-        //addActView.showLoading(ISPApplication.mApplication.getString(R.string.loading_add));
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
