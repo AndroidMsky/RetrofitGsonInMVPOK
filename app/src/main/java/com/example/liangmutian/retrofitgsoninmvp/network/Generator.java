@@ -22,7 +22,7 @@ public class Generator {
             .build();
     private static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(API_BASE_URL)
-            .addConverterFactory(new StringConverterFactory())
+          //  .addConverterFactory(new StringConverterFactory())
             .client(client)
             .build();
 

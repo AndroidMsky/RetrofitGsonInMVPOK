@@ -5,51 +5,42 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.liangmutian.retrofitgsoninmvp.network.Generator;
-import com.example.liangmutian.retrofitgsoninmvp.network.TestApi;
+import com.example.liangmutian.retrofitgsoninmvp.bean.ReBean;
+import com.example.liangmutian.retrofitgsoninmvp.presenter.MainPresenter;
+import com.example.liangmutian.retrofitgsoninmvp.view.MainView;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainView {
 
     EditText mEditText;
+    MainPresenter mMainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //初始化presenter
+        mMainPresenter = new MainPresenter(this);
         mEditText = (EditText) findViewById(R.id.editText);
+
     }
 
     public void getBaidu(View v) {
 
-        get("CN101020100", "059dbfea2d2a4bd995b7ee9934f4425f");
+        mMainPresenter.get("CN101020100", "059dbfea2d2a4bd995b7ee9934f4425f");
 
 
     }
 
-    public void get(String id, String key) {
-        TestApi api = Generator.createService(TestApi.class);
-        Call<ResponseBody> call = api.get(id, key);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    String msg = response.body().string();
-                    mEditText.setText("OK1:"+msg);
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+    @Override
+    public void success(ReBean reBean) {
+        mEditText.setText(reBean.mts);
+    }
 
-            @Override
-            public void onFailure(Call call, Throwable throwable) {
+    @Override
+    public void fail(String s) {
+        mEditText.setText(s);
 
-            }
-        });
     }
 }
